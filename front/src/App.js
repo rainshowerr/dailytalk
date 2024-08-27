@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Join from './pages/Join';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Write from './pages/Write';
 import Error from './components/Error';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createContext, useState } from 'react';
@@ -20,6 +21,7 @@ function App() {
 						<Route path="/join" element={<Join />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/profile" element={<Profile />} />
+						<Route path="/write" element={<Write />} />
 						<Route path="*" element={<Error />} />
 					</Routes>
 				</div>
