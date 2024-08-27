@@ -11,12 +11,16 @@ const Login = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post('http://localhost:4000/auth/login', {
-				email: email,
-				password: password,
-				withCredentials: true,
-			});
-			console.log('로그인 요청 보냄: ', response.data);
+			const response = await axios.post(
+				'http://localhost:4000/auth/login',
+				{
+					email: email,
+					password: password,
+				},
+				{
+					withCredentials: true,
+				}
+			);
 			navigate('/');
 		} catch (error) {
 			console.error('로그인 에러', error);

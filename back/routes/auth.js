@@ -63,12 +63,13 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 	})(req, res, next);
 }); // 미들웨어 확장패턴)
 
-router.get('/logout', (req, res, next) => {
+router.post('/logout', (req, res, next) => {
 	req.logOut((err) => {
 		if (err) {
 			return next(err);
 		} else {
 			req.session.destroy();
+			res.clearCookie('connect.sid', { secure: false, httpOnly: false });
 			res.json({
 				result: 'success',
 				message: '로그아웃 되었습니다',

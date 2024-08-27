@@ -1,24 +1,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	//const [data, setData] = useState('');
+	const navigate = useNavigate();
+	const [data, setData] = useState('');
 
 	useEffect(() => {
-		// axios
-		// 	.get('http://localhost:4000/')
-		// 	.then((res) => {
-		// 		setData(res.data);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error);
-		// 	});
+		axios
+			.get('http://localhost:4000/')
+			.then((res) => {
+				setData(res.data);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 
 		// 쿠키가 있는지 확인하는 함수
 		const checkCookie = () => {
 			const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('connect.sid='));
-			console.log(document.cookie);
 			setIsLoggedIn(cookieExists);
 		};
 
@@ -29,10 +30,12 @@ const Home = () => {
 	const handleLogout = () => {
 		// 로그아웃 시 쿠키 삭제 및 상태 업데이트
 		axios
-			.post('http://localhost:4000/auth/logout')
+			.post('http://localhost:4000/auth/logout', null, {
+				withCredentials: true,
+			})
 			.then((res) => {
-				console.log(res);
 				setIsLoggedIn(false);
+				navigate('/');
 			})
 			.catch((error) => {
 				console.error(error);
@@ -49,6 +52,7 @@ const Home = () => {
 			) : (
 				<button onClick={() => (window.location.href = 'http://localhost:3000/login/')}>Login</button>
 			)}
+			<div>{data}</div>
 		</div>
 	);
 };

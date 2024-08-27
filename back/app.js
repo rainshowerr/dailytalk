@@ -18,6 +18,13 @@ const passportConfig = require('./passport');
 const app = express();
 app.set('port', process.env.PORT || 4000);
 
+app.use(
+	cors({
+		origin: 'http://localhost:3000',
+		credentials: true,
+	})
+);
+
 passportConfig();
 
 sequelize
@@ -46,17 +53,18 @@ app.use(
 	})
 );
 app.use(passport.initialize()); // req.user req.login req.isAuthenticate req.logout
-app.use(
-	passport.session({
-		cookie: { secure: false, httpOnly: false },
-	})
-); // connect.sid라는 이름으로 세션 쿠키가 브라우저로 전송
-app.use(
-	cors({
-		origin: '*',
-		credentials: true,
-	})
-);
+app.use(passport.session()); // connect.sid라는 이름으로 세션 쿠키가 브라우저로 전송
+
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, X-AUTHENTICATION, X-IP, Content-Type, Accept'
+	);
+	res.header('Access-Control-Allow-Credentials', true);
+	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+	next();
+});
 
 app.use('/auth', authRouter);
 app.use('/', indexRouter);
