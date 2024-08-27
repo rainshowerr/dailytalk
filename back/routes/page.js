@@ -7,7 +7,7 @@ router.get('/profile', isLoggedIn, async (req, res, next) => {
 	try {
 		const user = await User.findOne({
 			where: { id: req.user.id },
-			include: { email, nick },
+			attributes: ['email', 'nick'],
 		});
 		if (user) {
 			res.json({ user });

@@ -6,11 +6,12 @@ const Profile = () => {
 	const [nick, setNick] = useState('');
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/profile')
+			.get('http://localhost:4000/profile', {
+				withCredentials: true,
+			})
 			.then((res) => {
-				console.log(res);
-				//setData(res.data.email);
-				//setData(res.data.nick);
+				setEmail(res.data.user.email);
+				setNick(res.data.user.nick);
 			})
 			.catch((error) => {
 				console.error('There was an error fetching the data!', error);
@@ -19,8 +20,8 @@ const Profile = () => {
 	return (
 		<div className="Home">
 			<h2>Daily talk</h2>
-			<div>{email}</div>
 			<div>{nick}</div>
+			<div>{email}</div>
 		</div>
 	);
 };
