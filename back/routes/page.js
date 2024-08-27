@@ -36,6 +36,28 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
 	}
 });
 
+router.get('/post/:id', async (req, res, next) => {
+	const id = req.params.id;
+	console.log('아이디: ', req.params.id);
+	try {
+		const post = await Post.findOne({
+			where: { id },
+			attributes: ['title', 'content', 'createdAt'],
+			include: [
+				{
+					model: User,
+					attributes: ['nick'],
+				},
+			],
+		});
+		console.log(post);
+		res.json(post);
+	} catch (error) {
+		console.log(error);
+		next(error);
+	}
+});
+
 router.get('/', (req, res) => {
 	res.send('HOME');
 });
