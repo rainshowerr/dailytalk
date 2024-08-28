@@ -15,7 +15,6 @@ const Post = () => {
 				withCredentials: true,
 			})
 			.then((res) => {
-				console.log(res);
 				setNick(res.data.User.nick);
 				setTitle(res.data.title);
 				setContent(res.data.content);

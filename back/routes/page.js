@@ -58,8 +58,31 @@ router.get('/post/:id', async (req, res, next) => {
 	}
 });
 
-router.get('/', (req, res) => {
-	res.send('HOME');
+router.get('/page/:id', async (req, res, next) => {
+	try {
+		const id = parseInt(req.params.id);
+		console.log('페이지', id);
+		const limit = 10; // 한 페이지에 보여줄 게시글 수
+		const offset = (id - 1) * limit;
+
+		const posts = await Post.findAll({
+			order: [['createdAt', 'DESC']],
+			attributes: ['id', 'title', 'createdAt'],
+			include: [
+				{
+					model: User,
+					attributes: ['nick'],
+				},
+			],
+			limit: limit,
+			offset: offset,
+		});
+		console.log(posts);
+		res.json(posts);
+	} catch (error) {
+		console.error(error);
+		next(error);
+	}
 });
 
 module.exports = router;

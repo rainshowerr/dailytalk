@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Write from './pages/Write';
 import Post from './pages/Post';
+import Page from './pages/Page';
 import Error from './components/Error';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { createContext, useState } from 'react';
@@ -24,6 +25,7 @@ function App() {
 						<Route path="/profile" element={<Profile />} />
 						<Route path="/write" element={<Write />} />
 						<Route path="/post/:id" element={<Post />} />
+						<Route path="/page/:id" element={<Page />} />
 						<Route path="*" element={<Error />} />
 					</Routes>
 				</div>

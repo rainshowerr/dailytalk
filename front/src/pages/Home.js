@@ -50,7 +50,13 @@ const Home = () => {
 					logout
 				</button>
 			) : (
-				<button onClick={() => (window.location.href = 'http://localhost:3000/login/')}>Login</button>
+				<button
+					type="button"
+					className="btn"
+					onClick={() => (window.location.href = 'http://localhost:3000/login/')}
+				>
+					Login
+				</button>
 			)}
 			<div>{data}</div>
 		</div>
