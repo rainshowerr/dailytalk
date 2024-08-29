@@ -3,6 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares');
 const User = require('../models/user');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 
 router.get('/profile', isLoggedIn, async (req, res, next) => {
 	try {
@@ -77,6 +78,20 @@ router.get('/page/:id', async (req, res, next) => {
 		res.json(posts);
 	} catch (error) {
 		console.error(error);
+		next(error);
+	}
+});
+
+router.post('/post/:id/comment', async (req, res, next) => {
+	try {
+		const comment = await Comment.create({
+			UserId: req.user.id,
+			PostId: req.params.id,
+			content: req.body.content,
+		});
+		res.json(comment);
+	} catch (error) {
+		console.log(error);
 		next(error);
 	}
 });
