@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import CommentInput from '../components/Post/CommentInput';
 
 const Post = () => {
 	const id = useParams().id;
@@ -32,7 +33,7 @@ const Post = () => {
 			.catch((error) => {
 				console.error('댓글 목록을 불러오는 중 에러가 발생했습니다.', error);
 			});
-	}, []);
+	}, [id]);
 	return (
 		<div className="Home">
 			<h2>Daily talk</h2>
@@ -50,6 +51,7 @@ const Post = () => {
 					</li>
 				))}
 			</ul>
+			<CommentInput comments={comments} setComments={setComments} />
 			<button type="button" onClick={() => window.history.back()}>
 				목록으로
 			</button>
