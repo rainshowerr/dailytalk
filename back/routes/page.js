@@ -74,7 +74,7 @@ router.get('/page/:id', async (req, res, next) => {
 			limit: limit,
 			offset: offset,
 		});
-\		res.json(posts);
+		res.json(posts);
 	} catch (error) {
 		console.error(error);
 		next(error);
