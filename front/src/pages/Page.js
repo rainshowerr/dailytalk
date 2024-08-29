@@ -37,7 +37,7 @@ const Page = () => {
 			<ul>
 				{posts.map((post) => (
 					<li key={post.id}>
-						<h2>{post.title}</h2>
+						<a href={`http://localhost:3000/post/${post.id}`}>{post.title}</a>
 						<p>By: {post.User.nick}</p>
 						<p>Created At: {new Date(post.createdAt).toLocaleString()}</p>
 						<br />
