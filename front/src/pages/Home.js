@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import Logout from '../components/Logout';
 
 const Home = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const navigate = useNavigate();
 	const [data, setData] = useState('');
 
 	useEffect(() => {
@@ -18,28 +16,11 @@ const Home = () => {
 		checkCookie();
 	}, []);
 
-	const handleLogout = () => {
-		// 로그아웃 시 쿠키 삭제 및 상태 업데이트
-		axios
-			.post('http://localhost:4000/auth/logout', null, {
-				withCredentials: true,
-			})
-			.then((res) => {
-				setIsLoggedIn(false);
-				navigate('/');
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	};
-
 	return (
 		<div className="Home">
 			<h2>Daily talk</h2>
 			{isLoggedIn ? (
-				<button type="button" className="btn" onClick={handleLogout}>
-					logout
-				</button>
+				<Logout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 			) : (
 				<button
 					type="button"
