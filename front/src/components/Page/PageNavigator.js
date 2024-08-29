@@ -3,9 +3,10 @@ import axios from 'axios';
 
 const PageNavigator = ({ pageId }) => {
 	const [validPages, setValidPages] = useState(new Set());
-	const [meanPageId, setMeanPageId] = useState(Math.floor(pageId / 5) + 1);
+	const [meanPageId, setMeanPageId] = useState(Math.floor(parseInt(pageId - 1) / 5) * 5 + 1);
 
 	useEffect(() => {
+		console.log('pageId:', pageId, 'Type:', typeof pageId);
 		const isPageVaild = async (checkPageId) => {
 			let postNum;
 			return axios
@@ -59,7 +60,7 @@ const PageNavigator = ({ pageId }) => {
 					className="btn"
 					onClick={() => (window.location.href = `http://localhost:3000/page/${pageId}`)}
 				>
-					{pageId}
+					{pageId >= meanPageId ? (pageId > meanPageId + 4 ? '▶︎▶︎' : pageId) : '◀︎◀︎'}
 				</button>
 			))}
 		</div>

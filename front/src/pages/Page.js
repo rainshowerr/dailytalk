@@ -42,7 +42,7 @@ const Page = () => {
 					</li>
 				))}
 			</ul>
-			<PageNavigator pageId />
+			<PageNavigator pageId={pageId} />
 		</div>
 	);
 };
