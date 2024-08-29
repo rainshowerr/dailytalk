@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { LoginContext } from '../App';
 import Logout from '../components/Logout';
 
 const Home = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 	const [data, setData] = useState('');
 
 	useEffect(() => {
@@ -20,7 +21,7 @@ const Home = () => {
 		<div className="Home">
 			<h2>Daily talk</h2>
 			{isLoggedIn ? (
-				<Logout isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+				<Logout />
 			) : (
 				<button
 					type="button"

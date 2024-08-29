@@ -1,8 +1,12 @@
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { LoginContext } from '../App';
 
-const Logout = ({ isLoggedIn, setIsLoggedIn }) => {
+const Logout = () => {
+	const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
 	const navigate = useNavigate();
+
 	const handleLogout = () => {
 		// 로그아웃 시 쿠키 삭제 및 상태 업데이트
 		axios
