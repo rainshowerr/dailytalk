@@ -29,7 +29,7 @@ const Write = () => {
 				{ withCredentials: true }
 			);
 			if (response.status === 200) {
-				navigate('/');
+				navigate('/page/1');
 			}
 		} catch (err) {
 			console.error(err);
