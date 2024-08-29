@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import PageNavigator from '../components/Page/PageNavigator';
+import Logout from '../components/Logout';
 
 const Page = () => {
 	const pageId = useParams().id;
@@ -24,6 +25,7 @@ const Page = () => {
 	return (
 		<div>
 			<h1>Post List</h1>
+			<Logout />
 			<button
 				type="button"
 				className="btn"
