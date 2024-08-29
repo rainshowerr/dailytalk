@@ -82,14 +82,21 @@ router.get('/page/:id', async (req, res, next) => {
 	}
 });
 
-router.post('/post/:id/comment', async (req, res, next) => {
+router.post('/post/:id/comment', isLoggedIn, async (req, res, next) => {
 	try {
 		const comment = await Comment.create({
 			UserId: req.user.id,
 			PostId: req.params.id,
 			content: req.body.content,
 		});
-		res.json(comment);
+		const user = await User.findByPk(req.user.id);
+		const commentWithUserNick = {
+			...comment.toJSON(),
+			User: {
+				nick: user.nick,
+			},
+		};
+		res.json(commentWithUserNick);
 	} catch (error) {
 		console.log(error);
 		next(error);
