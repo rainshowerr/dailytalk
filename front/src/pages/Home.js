@@ -8,15 +8,6 @@ const Home = () => {
 	const [data, setData] = useState('');
 
 	useEffect(() => {
-		axios
-			.get('http://localhost:4000/')
-			.then((res) => {
-				setData(res.data);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-
 		// 쿠키가 있는지 확인하는 함수
 		const checkCookie = () => {
 			const cookieExists = document.cookie.split(';').some((item) => item.trim().startsWith('connect.sid='));
@@ -58,7 +49,14 @@ const Home = () => {
 					Login
 				</button>
 			)}
-			<div>{data}</div>
+			<br />
+			<button
+				type="button"
+				className="btn"
+				onClick={() => (window.location.href = 'http://localhost:3000/page/1')}
+			>
+				접속하기
+			</button>
 		</div>
 	);
 };
