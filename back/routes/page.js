@@ -101,6 +101,10 @@ router.get('/post/:id/comment', async (req, res, next) => {
 	try {
 		const comments = await Comment.findAll({
 			where: { PostId: postId },
+			include: {
+				model: User,
+				attributes: ['nick'],
+			},
 		});
 		res.json(comments);
 	} catch (error) {
