@@ -6,7 +6,6 @@ const PageNavigator = ({ pageId }) => {
 	const [meanPageId, setMeanPageId] = useState(Math.floor(parseInt(pageId - 1) / 5) * 5 + 1);
 
 	useEffect(() => {
-		console.log('pageId:', pageId, 'Type:', typeof pageId);
 		const isPageVaild = async (checkPageId) => {
 			let postNum;
 			return axios
@@ -14,7 +13,6 @@ const PageNavigator = ({ pageId }) => {
 					withCredentials: true,
 				})
 				.then((res) => {
-					console.log('됨?', checkPageId, res.data.length);
 					postNum = res.data.length;
 					return postNum > 0;
 				})
@@ -39,7 +37,6 @@ const PageNavigator = ({ pageId }) => {
 			for (const pageId of pageIds) {
 				if (pageId > 0) {
 					const isValid = await isPageVaild(pageId);
-					console.log(pageId, isValid);
 					if (isValid) {
 						validPageSet.add(pageId);
 					}

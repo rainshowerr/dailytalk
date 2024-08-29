@@ -38,7 +38,6 @@ router.post('/write', isLoggedIn, async (req, res, next) => {
 
 router.get('/post/:id', async (req, res, next) => {
 	const id = req.params.id;
-	console.log('아이디: ', req.params.id);
 	try {
 		const post = await Post.findOne({
 			where: { id },
@@ -50,7 +49,6 @@ router.get('/post/:id', async (req, res, next) => {
 				},
 			],
 		});
-		console.log(post);
 		res.json(post);
 	} catch (error) {
 		console.log(error);
@@ -61,7 +59,6 @@ router.get('/post/:id', async (req, res, next) => {
 router.get('/page/:id', async (req, res, next) => {
 	try {
 		const id = parseInt(req.params.id);
-		console.log('페이지', id);
 		const limit = 10; // 한 페이지에 보여줄 게시글 수
 		const offset = (id - 1) * limit;
 
@@ -77,8 +74,7 @@ router.get('/page/:id', async (req, res, next) => {
 			limit: limit,
 			offset: offset,
 		});
-		console.log(posts);
-		res.json(posts);
+\		res.json(posts);
 	} catch (error) {
 		console.error(error);
 		next(error);
