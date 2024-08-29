@@ -24,6 +24,14 @@ const Page = () => {
 	return (
 		<div>
 			<h1>Post List</h1>
+			<button
+				type="button"
+				className="btn"
+				onClick={() => (window.location.href = 'http://localhost:3000/write')}
+			>
+				글쓰기
+			</button>
+
 			<ul>
 				{posts.map((post) => (
 					<li key={post.id}>
